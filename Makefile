@@ -1,7 +1,8 @@
 #
 # Makefile
 #
-CC 				:= $(shell which riscv64-unknown-linux-musl-gcc)
+
+CC				:= /home/proyrb/workspace/duo-buildroot-sdk/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc
 LVGL_DIR_NAME 	?= lvgl
 LVGL_DIR 		?= .
 
@@ -13,8 +14,8 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wpointer-arith -Wno-cast-qual -Wmissing-prototypes \
 					-Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wno-discarded-qualifiers -Wformat-security -Wno-ignored-qualifiers -Wno-sign-compare -std=gnu99#c99
 CFLAGS 			?= -O3 -g0 -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -Wall -Wshadow -I$(LVGL_DIR)/ $(WARNINGS)
-CFLAGS 			+= -I/home/proyrb/Documents/Milk-V_Duo_S/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5
-CFLAGS 			+= -I/home/proyrb/Documents/Milk-V_Duo_S/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5/Include
+CFLAGS 			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5
+CFLAGS 			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5/Include
 LDFLAGS 		?= -Llib -lpython3.9
 BIN 			= demo
 BUILD_DIR 		= ./build
