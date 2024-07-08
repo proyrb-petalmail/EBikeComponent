@@ -1,10 +1,8 @@
-#
 # Makefile
-#
 
-CC				:= /home/proyrb/workspace/duo-buildroot-sdk/host-tools/gcc/riscv64-linux-musl-x86_64/bin/riscv64-unknown-linux-musl-gcc
-LVGL_DIR_NAME 	?= lvgl
-LVGL_DIR 		?= .
+CC				:= riscv64-unknown-linux-musl-gcc
+LVGL_DIR_NAME	?= lvgl
+LVGL_DIR		?= .
 
 WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifiers -Wall -Wextra -Wno-unused-function -Wno-error=strict-prototypes -Wpointer-arith \
 					-fno-strict-aliasing -Wno-error=cpp -Wuninitialized -Wmaybe-uninitialized -Wno-unused-parameter -Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess \
@@ -13,36 +11,40 @@ WARNINGS		:= -Wall -Wshadow -Wundef -Wmissing-prototypes -Wno-discarded-qualifie
 					-Wno-unused-value -Wno-unused-parameter -Wno-missing-field-initializers -Wuninitialized -Wmaybe-uninitialized -Wall -Wextra -Wno-unused-parameter \
 					-Wno-missing-field-initializers -Wtype-limits -Wsizeof-pointer-memaccess -Wno-format-nonliteral -Wpointer-arith -Wno-cast-qual -Wmissing-prototypes \
 					-Wunreachable-code -Wno-switch-default -Wreturn-type -Wmultichar -Wno-discarded-qualifiers -Wformat-security -Wno-ignored-qualifiers -Wno-sign-compare -std=gnu99#c99
-CFLAGS 			?= -O3 -g0 -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -Wall -Wshadow -I$(LVGL_DIR)/ $(WARNINGS)
-CFLAGS 			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5
-CFLAGS 			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5/Include
-LDFLAGS 		?= -Llib -lpython3.9
-BIN 			= demo
-BUILD_DIR 		= ./build
-BUILD_OBJ_DIR 	= $(BUILD_DIR)/obj
-BUILD_BIN_DIR 	= $(BUILD_DIR)/bin
 
-prefix 			?= /usr
-bindir 			?= $(prefix)/bin
+CFLAGS			?= -O3 -g0 -mcpu=c906fdv -march=rv64imafdcv0p7xthead -mcmodel=medany -mabi=lp64d -Wall -Wshadow -I$(LVGL_DIR)/ $(WARNINGS)
+CFLAGS			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5
+CFLAGS			+= -I/home/proyrb/workspace/duo-buildroot-sdk/buildroot-2021.05/output/milkv-duos-emmc_musl_riscv64/build/host-python3-3.9.5/Include
 
-#Collect the files to compile
-MAINSRC = 		./main.c
+LDFLAGS			?= -Llib -lpython3.9
+
+BIN				= demo
+
+BUILD_DIR		= ./build
+BUILD_OBJ_DIR	= $(BUILD_DIR)/obj
+BUILD_BIN_DIR	= $(BUILD_DIR)/bin
+
+prefix			?= /usr
+bindir			?= $(prefix)/bin
+
+# Collect the files to compile
+MAINSRC			= ./main.c
 
 include $(LVGL_DIR)/lvgl/lvgl.mk
 include $(LVGL_DIR)/lv_drivers/lv_drivers.mk
 
-#CSRCS 			+=$(LVGL_DIR)/mouse_cursor_icon.c 
+# CSRCS			+= $(LVGL_DIR)/mouse_cursor_icon.c 
 
-OBJEXT 			?= .o
+OBJEXT			?= .o
 
-AOBJS 			= $(ASRCS:.S=$(OBJEXT))
-COBJS 			= $(CSRCS:.c=$(OBJEXT))
+AOBJS			= $(ASRCS:.S=$(OBJEXT))
+COBJS			= $(CSRCS:.c=$(OBJEXT))
 
-MAINOBJ 		= $(MAINSRC:.c=$(OBJEXT))
+MAINOBJ			= $(MAINSRC:.c=$(OBJEXT))
 
-SRCS 			= $(ASRCS) $(CSRCS) $(MAINSRC)
-OBJS 			= $(AOBJS) $(COBJS) $(MAINOBJ)
-TARGET 			= $(addprefix $(BUILD_OBJ_DIR)/, $(patsubst ./%, %, $(OBJS)))
+SRCS			= $(ASRCS) $(CSRCS) $(MAINSRC)
+OBJS			= $(AOBJS) $(COBJS) $(MAINOBJ)
+TARGET			= $(addprefix $(BUILD_OBJ_DIR)/, $(patsubst ./%, %, $(OBJS)))
 
 ## MAINOBJ -> OBJFILES
 
