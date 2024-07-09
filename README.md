@@ -1,4 +1,4 @@
-# e-bicycle-petalmail
+# e-bicycle-display
 设计制作一个基于搭载了SG2000芯片的Milk-V系统板和Linux系统之上，驱动8英寸MIPI屏，使用LVGL呈现丰富的骑行数据与导航数据的电动自行车屏显产品。
 ## 配置说明
 ### 配置Makefile文件
